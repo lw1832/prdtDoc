@@ -1,0 +1,20 @@
+inputs: D:\pyWorkSpace\test\PDF-Extract-Kit-main\inputs\\ocr\邮储直播产品推荐手册.pdf
+outputs: ../logs/OCR_LAYOUT
+tasks:
+  ocr:
+    visualize: True
+    model: ocr_ppocr
+    model_config:
+      lang: ch
+      show_log: True
+      det_model_dir: models/OCR/PaddleOCR/det/ch_PP-OCRv4_det
+      rec_model_dir: models/OCR/PaddleOCR/rec/ch_PP-OCRv4_rec
+      det_db_box_thresh: 0.3
+  layout_detection:
+    model: layout_detection_yolo
+    model_config:
+      img_size: 1024
+      conf_thres: 0.25
+      iou_thres: 0.45
+      model_path: ../models/Layout/YOLO/doclayout_yolo_docstructbench_imgsz1280_2501.pt
+      visualize: True
